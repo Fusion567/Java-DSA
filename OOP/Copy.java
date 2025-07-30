@@ -1,3 +1,4 @@
+//copy constructor
 class Student{
     int age;
     String name;
@@ -5,19 +6,24 @@ class Student{
     public void getinfo(){
         System.out.println("Name of Student is: "+this.name);
         System.out.println("Age of Student is: "+this.age);
-    }
-}
-public class Oop{
-    public static void main(String[] args) {
-        Student s1 = new Student();
-        s1.name = "Rehan";
-        s1.age = 12;
-        s1.getinfo();
-        
-        Student s2 = new Student();
-        s2.name = "Anushka";
-        s2.age = 16;
-        s2.getinfo();
 
     }
-}   
+    Student(Student s2){
+        this.name = s2.name;
+        this.age = s2.age;
+    }
+
+    Student(){
+        
+    }
+}
+public class Copy {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.name = "Rohan";
+        s1.age = 24;
+
+        Student s2 = new Student(s1);
+        s2.getinfo();
+    }
+}
