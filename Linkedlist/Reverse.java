@@ -1,9 +1,9 @@
-//Linked List from scratch
-class LL{
+
+class Reverse {
     Node head;
     private int size;
 
-    LL(){
+    Reverse(){
         this.size = size;
     }
 
@@ -74,7 +74,7 @@ class LL{
 
     public void deleteLast(){
         if(head==null){
-            System.out.println("Head is emoty");
+            System.out.println("Head is empty");
             return;
         }
         
@@ -99,10 +99,46 @@ class LL{
 
     public int getSize(){
         return size;
+    }   
+
+    //Iterative way to reverse linked list Time complexity - O(n)       Space complexity - O(1)
+
+    public void reverseIterate(){
+
+        if (head == null|| head.next == null){
+            return;
+        }
+
+        Node prevNode = head;
+        Node currNode = head.next;
+
+        while (currNode != null) { 
+            Node nextNode = currNode.next;
+            currNode.next = prevNode;
+
+            // Update
+            prevNode = currNode;
+            currNode = nextNode; 
+        }
+        head.next = null;
+        head = prevNode;
+    }
+
+
+    //Recursive Method  Time complexity - O(n)      Space complexity - O(1) 
+    public Node reverseRecursive(Node head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node newHead = reverseRecursive(head);
+        head.next.next = head;
+        head.next = null;
+
+        return  newHead;
     }
 
     public static void main(String[] args) {
-        LL list = new LL();
+        Reverse list = new Reverse();
         list.addFirst("a");
         list.addFirst("is");
         list.printList();
@@ -113,6 +149,12 @@ class LL{
         list.addFirst("This");
         list.printList();
 
+        list.reverseIterate();
+        list.printList();
+
+        list.head = list.reverseRecursive(list.head);
+        list.printList();
+
         list.deleteFirst();
         list.printList();
 
@@ -120,5 +162,6 @@ class LL{
         list.printList();
 
         System.out.println(list.getSize());
+
     }
 }
